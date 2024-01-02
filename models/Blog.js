@@ -1,5 +1,5 @@
 //import packages
-const { Model, Datatypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 //import database connection
 const sequelize = require('../config/connection');

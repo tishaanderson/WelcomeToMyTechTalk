@@ -1,5 +1,5 @@
 //import packages
-const { Model, Datatypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 
 //import database connection
