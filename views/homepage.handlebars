@@ -1,0 +1,10 @@
+{{#each blogs as |blog|}}
+<div>
+  <div>
+    <h2>
+      <a href="/blog/{{blog.title}}">{{blog.title}}</a>
+    </h2>
+    <p>Created by: {{blog.user.name}} on {{blog.date_created}} </p>
+  </div>
+</div>
+{{/each}}

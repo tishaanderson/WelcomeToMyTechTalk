@@ -2,7 +2,7 @@ const sequelize = require('../config/connection');
 const { User, Blog } = require('../models');
 
 const userData = require('./user.json');
-const blogData = require('./blogs.json');
+const blogData = require('./blog.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -13,10 +13,17 @@ const seedDatabase = async () => {
   });
 
   for(const blog of blogData) {
-    await Blog.create({
-      ...blog,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
+
+    const associatedUser = users.find((user) => user.id === blog.user_id);
+
+    if (associatedUser) {
+      await Blog.create({
+        ...blog,
+        user_id: associatedUser.id,
+      });
+    } else {
+      console.log(`User with id ${blog.user_id} not found`);
+    }
   }
   
   process.exit(0);
