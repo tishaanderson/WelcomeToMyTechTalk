@@ -1,13 +1,11 @@
 [
   {
-    "id": 1,
     "title": "First Blog Post",
     "description": "This is the description of the first blog post.",
     "date_created": "2023-12-30",
     "user_id": 1
   },
   {
-    "id": 2,
     "title": "Second Blog Post",
     "description": "This is the description of the second blog post.",
     "date_created": "2023-12-31",
