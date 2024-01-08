@@ -31,7 +31,11 @@ router.get('/', async (req, res) => {
 router.get('/blog/:id', async (req, res) => {
   try {
     const blogId = req.params.id;
-    const blogData = await Blog.findByPk(blogId);
+    const blogData = await Blog.findByPk(blogId, { 
+      include: {
+        model: User
+      }
+    });
 
     if (!blogData) {
       res.status(404).json({ message: 'Blog not found' });
@@ -42,7 +46,7 @@ router.get('/blog/:id', async (req, res) => {
 
     res.render('blog', {
       blog,
-      
+      ...blog,
       logged_in: req.session.logged_in
     });
   } catch (err) {
