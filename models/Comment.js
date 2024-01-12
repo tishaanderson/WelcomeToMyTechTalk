@@ -42,4 +42,4 @@ Comment.init(
   }
 );
 
-module.exports = Blog; //exporting Blog model
+module.exports = Comment; //exporting Comment model

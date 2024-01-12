@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -32,9 +32,12 @@ router.get('/blog/:id', async (req, res) => {
   try {
     const blogId = req.params.id;
     const blogData = await Blog.findByPk(blogId, { 
-      include: {
-        model: User
-      }
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User]
+        }]      
     });
 
     if (!blogData) {
@@ -43,7 +46,7 @@ router.get('/blog/:id', async (req, res) => {
     }
 
     const blog = blogData.get({ plain: true });
-
+console.log(blog);
     res.render('blog', {
       blog,
       ...blog,
@@ -53,6 +56,30 @@ router.get('/blog/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// router.post('/blog/:id/comments', withAuth, async (req, res) => {
+//   try {
+//     const { text, user_id } = req.body;
+//     const blogId = req.params.id;
+//     const blog = await Blog.findByPk(blogId);
+    
+//     if (!blog) {
+//       res.status(404).json({ message: 'Comment not found' });
+//       return;
+//     }
+
+//     const newComment = await Comment.create({
+//       text,
+//       comment_date: new Date(),
+//       user_id: req.session.user_id,
+//       blog_id: blog.id,
+//     });
+
+//     res.status(201).json(newComment);
+//   } catch (err) {
+//     res.status(500).json({ message: 'Failed to create comment'});
+//   }
+// });
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {

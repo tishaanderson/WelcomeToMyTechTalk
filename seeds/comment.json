@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "text": "This is the first comment.",
+      "comment_date": "2024-01-07",
+      "user_id": 1
+    },
+    {
+      "id": 2,
+      "text": "This is another comment.",
+      "comment_date": "2024-01-07",
+      "user_id": 2
+    },
+    {
+      "id": 3,
+      "text": "Yet another comment here.",
+      "comment_date": "2024-01-07",
+      "user_id": 3
+    }
+  ]
+}
