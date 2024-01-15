@@ -1,14 +1,14 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#blog-name').value.trim();
+  const title = document.querySelector('#blog-title').value.trim();
   // const needed_funding = document.querySelector('#project-funding').value.trim();
-  const description = document.querySelector('#blog-desc').value.trim();
+  const content = document.querySelector('#blog-desc').value.trim();
 
-  if (name && description) {
+  if (title && content) {
     const response = await fetch(`/api/blogs`, {
       method: 'POST',
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ title, content }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -34,6 +34,7 @@ const delButtonHandler = async (event) => {
       document.location.replace('/profile');
     } else {
       alert('Failed to delete blog');
+      console.error(response.statusText);
     }
   }
 };
